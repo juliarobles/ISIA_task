@@ -52,14 +52,14 @@ public class Matriz {
     public String toString(){
         String ret = "";
         ret += "[\n";
-        for (int i = 0; i < getDimension().width; i++) {
+        for (int i = 0; i < getDimension().height; i++) {
             ret += "(";
-            for (int j = 0; j < getDimension().height; j++) {  
-                ret += String.format("%3d", datos[i][j]); 
-                if (j != getDimension().height - 1) ret += ", ";
+            for (int j = 0; j < getDimension().width; j++) {  
+                ret += String.format("%3d", datos[j][i]); 
+                if (j != getDimension().width - 1) ret += ", ";
             } 
             ret += ")";
-            if (i != getDimension().width - 1) ret += ",";
+            if (i != getDimension().height - 1) ret += ",";
             ret += "\n";
         } 
         ret += "]\n";
@@ -78,4 +78,24 @@ public class Matriz {
         }
         return traspuesta;
     }
+    public static Matriz multiplicarDosMatrices(Matriz a, Matriz b) throws DimensionesIncompatibles {
+        int filasA = a.getDimension().height; 
+        int columnasA = a.getDimension().width; 
+        int filasB = b.getDimension().height; 
+        int columnasB = b.getDimension().width; 
+        
+        if(columnasA != filasB) throw new DimensionesIncompatibles("La multiplicación de matrices requiere matrices donde la primera tenga el mismo número de columnas que el numero de filas de la segunda");        
+        
+        Matriz matrizResultante = new Matriz(filasA, columnasB, false);
+        for (int i = 0; i < filasA; i++) {
+            for (int j = 0; j < columnasB; j++) {
+                for (int k = 0; k < columnasA; k++) {
+                    matrizResultante.datos[j][i] += a.datos[k][i] * b.datos[j][k];
+                }
+            }
+        }
+        
+        return matrizResultante; 
+    }
+    
 }

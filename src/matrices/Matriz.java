@@ -78,7 +78,6 @@ public class Matriz {
         for (int i = 0; i < filasA; i++) {
             for (int j = 0; j < columnasB; j++) {
                 for (int k = 0; k < columnasA; k++) {
-                    // aquí se multiplica la matriz
                     matrizResultante.datos[j][i] += a.datos[k][i] * b.datos[j][k];
                 }
             }

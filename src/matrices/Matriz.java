@@ -30,10 +30,6 @@ public class Matriz {
         this(d.height, d.width, inicializarAleatorio);
     }
     
-    private Matriz(int[][] datos){
-        this.datos = datos;
-    }
-    
     public Dimension getDimension(){
         return new Dimension(datos.length, datos[0].length);
     }
@@ -73,13 +69,13 @@ public class Matriz {
     public static Matriz traspuesta(Matriz a){
         int filas = a.getDimension().height; 
         int columnas = a.getDimension().width;
-        int[][] datos_transpuesta = new int[filas][];
-        for(int i=0; i<filas; i++){
-            datos_transpuesta[i] = new int[columnas];
-            for(int j=0; j<columnas; j++){
-                datos_transpuesta[i][j]=a.datos[j][i];
+        Matriz traspuesta = new Matriz(columnas, filas, false);
+        
+        for(int i=0; i<columnas; i++){
+            for(int j=0; j<filas; j++){
+                traspuesta.datos[j][i]=a.datos[i][j];
             }
         }
-        return new Matriz(datos_transpuesta);
+        return traspuesta;
     }
 }
